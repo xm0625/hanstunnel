@@ -53,7 +53,7 @@ Tun::Tun(const char *device, int mtu)
 
 	char cmdline[512];
 	snprintf(cmdline, sizeof(cmdline), "/sbin/ifconfig %s mtu %u", this->device, mtu);
-	if (system(cmdline) != 0)
+	if (popen(cmdline, "r") != 0)
 		syslog(LOG_ERR, "could not set tun device mtu");
 }
 
@@ -74,14 +74,14 @@ void Tun::setIp(uint32_t ip, uint32_t destIp, bool includeSubnet)
 	snprintf(cmdline, sizeof(cmdline), "/sbin/ifconfig %s %s %s netmask 255.255.255.255", device, ips.c_str(), destIps.c_str());
 #endif
 
-	if (system(cmdline) != 0)
+	if (popen(cmdline, "r") != 0)
 		syslog(LOG_ERR, "could not set tun device ip address");
 
 #ifndef LINUX
 	if (includeSubnet)
 	{
 		snprintf(cmdline, sizeof(cmdline), "/sbin/route add %s/24 %s", destIps.c_str(), destIps.c_str());
-		if (system(cmdline) != 0)
+		if (popen(cmdline, "r") != 0)
 			syslog(LOG_ERR, "could not add route");
 	}
 #endif

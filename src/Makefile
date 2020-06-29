@@ -1,8 +1,8 @@
-LDFLAGS = `sh osflags ld $(MODE)`
+LDFLAGS = tunemu.o ./libpcap_arm64/local/lib/libpcap.a
 CFLAGS = -c -g `sh osflags c $(MODE)`
 TUN_DEV_FILE = `sh osflags dev $(MODE)`
-GCC = gcc
-GPP = g++
+GCC = xcrun -sdk iphoneos clang -arch arm64
+GPP = xcrun -sdk iphoneos clang++ -arch arm64
 
 all: hans
 
@@ -50,4 +50,4 @@ clean:
 
 
 tunemu.o: tunemu.h tunemu.c
-	$(GCC) -c tunemu.c -o tunemu.o
+	$(GCC) -c tunemu.c -o tunemu.o -I./libpcap_arm64/local/include

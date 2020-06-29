@@ -30,7 +30,7 @@
 class Worker
 {
 public:
-	Worker(int tunnelMtu, const char *deviceName, bool answerEcho, uid_t uid, gid_t gid);
+	Worker(int tunnelMtu, const char *deviceName, bool answerEcho, uid_t uid, __darwin_gid_t gid);
 	virtual ~Worker();
 
 	virtual void run();
@@ -91,7 +91,7 @@ protected:
 	int tunnelMtu;
 	int maxTunnelHeaderSize;
 	uid_t uid;
-	gid_t gid;
+	__darwin_gid_t gid;
 
 	bool privilegesDropped;
 

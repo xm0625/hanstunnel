@@ -44,7 +44,7 @@ bool Worker::TunnelHeader::Magic::operator!=(const Magic &other) const
 	return memcmp(data, other.data, sizeof(data)) != 0;
 }
 
-Worker::Worker(int tunnelMtu, const char *deviceName, bool answerEcho, uid_t uid, gid_t gid)
+Worker::Worker(int tunnelMtu, const char *deviceName, bool answerEcho, uid_t uid, __darwin_gid_t gid)
 {
 	this->tunnelMtu = tunnelMtu;
 	this->answerEcho = answerEcho;

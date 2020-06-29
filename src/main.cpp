@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
     uint32_t clientIp = INADDR_NONE;
 	bool answerPing = false;
 	uid_t uid = 0;
-	gid_t gid = 0;
+	__darwin_gid_t gid = 0;
 	bool changeEchoId = false;
 	bool changeEchoSeq = false;
 	bool verbose = false;
